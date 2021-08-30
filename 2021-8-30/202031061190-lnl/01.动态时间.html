@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello_react</title>
+</head>
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+
+
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom,用于支持react操作DOM -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel,用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+    
+    <script type="text/babel">
+    const data = new Date()
+
+    //1.创建函数式组件
+    function tick(){
+        const element=(
+            <div style={{fontSize:"30px"}}>
+            <span>现在是{new Date().getFullYear()}年</span>
+            <span>{new Date().getMonth()+1}月</span>
+            <span>{new Date().getDate()}日</span>
+            <span>{new Date().toLocaleTimeString()} 点</span>
+            </div>
+        );
+        //渲染
+        ReactDOM.render(element,document.getElementById("test"));
+    }
+    //每秒钟调用一次
+    setInterval(tick,1000);
+    </script>
+
+</body>
+</html>
