@@ -18,9 +18,45 @@ Number,string,null,boolean,undefined
 
 ​		-对于function,返回function类型
 
+​					typeof  "" //string
+
+​					typeof  1 //number
+
+​					typeof  true//boolean
+
+​					typeof  undefined //undefined
+
+​					typeof  null  // object
+
+​					typeof  []  //object
+
+​					typeof  function //function
+
+​					typeof   Date  // object
+
 ​	instanceof
 
+​					[] instanceof Array		//true
+
+​					[] instanceof Object		//true
+
+​					{} instanceof Object		//true
+
+​					Date() instanceof Date		//true
+
+
+
 ​	constructor
+
+​				''.constructor == String	//true
+
+​				true .constructor == Boolean	//true
+
+​				[].constructor == Array			//true
+
+​				function.constructor == function			//true
+
+​				Date.constructor == Date			//true
 
 4.
 

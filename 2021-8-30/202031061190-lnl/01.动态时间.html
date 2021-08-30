@@ -20,11 +20,16 @@
 
     
     <script type="text/babel">
+    const data = new Date()
+
     //1.创建函数式组件
     function tick(){
         const element=(
-            <div>
-            <h1>现在是 {new Date().toLocaleTimeString()} 点</h1>
+            <div style={{fontSize:"30px"}}>
+            <span>现在是{new Date().getFullYear()}年</span>
+            <span>{new Date().getMonth()+1}月</span>
+            <span>{new Date().getDate()}日</span>
+            <span>{new Date().toLocaleTimeString()} 点</span>
             </div>
         );
         //渲染
