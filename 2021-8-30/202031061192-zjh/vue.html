@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <p>{{time}}</p>
+    </div>
+</body>
+<script>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+        el:"#root",
+        data() {
+            return {
+                time:''
+            }
+        },
+        mounted() {
+            // 传入当前实时时间
+            this.time = this.showTime(new Date())
+            let _this = this;
+            // 定时器
+            // 每隔1s刷新一下时间
+            this.timer = setInterval(function(){
+                // 每隔一秒修改一下时间
+                _this.time = _this.showTime(new Date());
+            },1000)
+        },
+        methods: {
+            showTime(nowTime){
+                // 当前实时时间
+                let myTime;
+                // 获取当前年份
+                var myYear = nowTime.getFullYear();
+                // 结果比实际月份少1
+                var myMonth = nowTime.getMonth() + 1;
+                var myDate = nowTime.getDate();
+                var myHour = nowTime.getHours();
+                var myMinutes = nowTime.getMinutes();
+                var mySeconds = nowTime.getSeconds();
+                myTime = myYear + ' 年 ' + myMonth + ' 月 ' + myDate + ' 日 ' + myHour + ' 时 ' + myMinutes + ' 分 ' + mySeconds + ' 秒';
+                return myTime;
+            }
+        },
+        destroyed() {
+            // 及时销毁定时器
+            if(this.timer){
+                clearInterval(this.timer)
+            }
+        },
+    })
+</script>
+</html>
