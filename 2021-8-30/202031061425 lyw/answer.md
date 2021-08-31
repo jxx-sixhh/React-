@@ -10,13 +10,68 @@ JS 采用双精度版本，存在精度问题
 
 3.
 
-typeof
+<u>typeof方法</u>
 
-用instanceof判断实例是否属于某种类型
+​    typeof 666, //"number"
+​    typeof 'abc', //"string"
+​    typeof false, //"boolean"
+​    typeof undefined, //"undefined"
+​    typeof null, //"object"
+​    typeof [1,2,3], //"object"
+​    typeof {a:1,b:2,c:3}, //"object"
+​    typeof function(){console.log('aaa');}, //"function"
+​    typeof new Date(), //"object"
 
-Object.prototype.toString 返回其调用者的具体类型
+<u>用instanceof判断实例是否属于某种类型</u>
 
-constructor（不稳定） 指向其引用者。
+​    666 instanceof Number, //false
+​    'lyw' instanceof String, //false
+​    false instanceof Boolean, //false
+​    undefined instanceof Object, //false
+​    null instanceof Object, //false
+​    [1,2,3] instanceof Array, //true
+​    {a:1,b:2,c:3} instanceof Object, //true
+​    function(){console.log('aaa');} instanceof Function, //true
+
+<u>Object.prototype.toString 返回其调用者的具体类型</u>
+
+Object.prototype.toString.call(123); //"[object Number]"
+Object.prototype.toString.call('abcdef'); //"[object String]"
+Object.prototype.toString.call(true); //"[object Boolean]"
+Object.prototype.toString.call([1, 2, 3, 4]); //"[object Array]"
+Object.prototype.toString.call({name:'wenzi', age:25}); //"[object Object]"
+Object.prototype.toString.call(function(){ console.log('function'); }); //"[object Function]"
+Object.prototype.toString.call(undefined); //"[object Undefined]"
+Object.prototype.toString.call(null); //"[object Null]"
+Object.prototype.toString.call(new Date()); //"[object Date]"
+
+<u>constructor（不稳定） 指向其引用者。</u>
+
+var num = 1;
+num.constructor
+ƒ Number() { [native code] }
+
+
+true.constructor
+ƒ Boolean() { [native code] }
+
+
+"".constructor
+ƒ String() { [native code] }
+
+
+var func = function(){}
+func.constructor
+ƒ Function() { [native code] }
+
+
+[].constructor
+ƒ Array() { [native code] }
+
+
+var obj = {}
+obj.constructor
+ƒ Object() { [native code] }
 
 4.
 
