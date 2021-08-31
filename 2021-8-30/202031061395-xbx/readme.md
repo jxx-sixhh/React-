@@ -12,12 +12,14 @@
 
 4.null是对象吗，为什么typeof null === 'object'
   null不是对象，null的数据类型是object
+  js 里的Null 是机器码NULL空指针, 所以空指针引用加上对象标记还是0,最终体现的类型还是object
 
 5. == 与 === 有什么区别
   第一个是值相同就true，第二个是绝对相等，类型也要相同
 
 6. 什么是类数组,如何将类数组转换为数组
   类数组：如果一个对象有 length 属性值，则它就是类数组
+  拥有length属性，length-0可隐式转换为number类型，并且不大于Math.pow(2,32)（比如：22.33和'022'都满足条件）
   <script>
       let divEle=document.querySelectorAll('div');
       let divArr=[];
