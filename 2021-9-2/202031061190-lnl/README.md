@@ -1,74 +1,79 @@
-#### 算法(大数相加 ) 
+#### 算法(大数相加)
 
 ````js
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hello_react</title>
-    <style>
-        .show{
-            width: 500px;
-            height: 500px;
-            background-color: aquamarine;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%);
-            text-align: center;
-            line-height: 500px;
-        }
-        input{
-            width: 50px;
-        }
-    </style>
 </head>
+
 <body>
     <!-- 准备好一个容器 -->
     <div id="test"></div>
 
 
     <!-- 引入react核心库 -->
-    <script src="../js/react.development.js"></script>
+    <script src="../js/17.0.1/react.development.js"></script>
     <!-- 引入react-dom,用于支持react操作DOM -->
-    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/17.0.1/react-dom.development.js"></script>
     <!-- 引入babel,用于将jsx转为js -->
-    <script src="../js/babel.min.js"></script>
+    <script src="../js/17.0.1/babel.min.js"></script>
 
-    
+
     <script type="text/babel">
+        class Add extends React.Component {
+            
+            state = {
+                num1: "",
+                num2: ""
+            }
 
-        class Add extends React.Component{
-            render(){
-                return(
-                    <div className="show">
-                        <input type="text" ref={(c)=>{this.input1=c}}/>
-                        <input type="text" ref={(c)=>{this.input2=c}}/>
-                        <button onClick={this.add}>输入计算两数之和(字符串形式)</button>
+            show = () => {
+                const { num1, num2 } = this.state
+                if (num1 === '0') return num2
+                if (num2 === '0') return num1
+                let len1 = num1.length - 1, len2 = num2.length - 1
+                let ans = '', up = 0
+                while (len1 >= 0 || len2 >= 0) {
+                    const m = len1 >= 0 ? num1[len1--] - '0' : 0
+                    const n = len2 >= 0 ? num2[len2--] - '0' : 0
+                    const temp = m + n + up
+                    up = Math.floor(temp / 10)
+                    ans = temp % 10 + ans
+                }
+                if (up === 1) {
+                    ans = up + ans
+                }
+                console.log(ans)
+            }
+
+
+            savenum = (date) => {
+                return (event) => {
+                    this.setState({ [date]: event.target.value })
+                }
+            }
+
+
+            render() {
+                return (
+                    <div>
+                        <input type="text" onChange={this.savenum('num1')} />
+                        <input type="text" onChange={this.savenum("num2")} />
+                        <button onClick={this.show}>点击计算两数之和</button>
                     </div>
                 )
             }
-            add=()=>{
-                const num1=this.input1.value
-                const num2=this.input2.value//这里输入数字之后它们的类型就是string
-                alert((+num1+(+num2))+"")
-                alert(typeof((+num1+(+num2))+""))//返回的也是string
-
-                /* 
-                字符串转化成数字:parseInt(num,进制)
-                                parseFloat(num)
-                                +num
-                                Number(num)
-                */
-            }
         }
-    
-        ReactDOM.render(<Add/>,document.getElementById('test'))
+        ReactDOM.render(<Add />, document.getElementById('test'))
     </script>
 
 </body>
+
 </html>
 ````
 
@@ -145,3 +150,73 @@
       ````
 
       
+
+````js
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello_react</title>
+
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+
+
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom,用于支持react操作DOM -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel,用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+
+
+    <script type="text/babel">
+        class Time extends React.Component {
+            constructor(props) {
+                super(props)
+                let date = new Date().getDate();
+                let month = new Date().getMonth() + 1;
+                let year = new Date().getFullYear();
+                let now1 = new Date().toLocaleTimeString()
+                this.state = {
+                    year: year,
+                    month: month,
+                    date: date,
+                    now1: now1
+                }
+            }
+
+            componentDidMount() {
+                this.timer = setInterval(() => {
+                    //获取原状态
+                    const { year, month, date, now1 } = this.state
+                    let date2 = new Date().getDate();
+                    let now2 = new Date().toLocaleTimeString()
+                    this.setState({now1:now2})
+                }, 1000)
+            }
+
+            render() {
+                const { year, month, date, now1 } = this.state
+                return (
+                    <div>
+                        <div>显示时间</div>
+                        <div>{year}-{month}-{date}{now1}</div>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Time />, document.getElementById('test'))
+    </script>
+
+</body>
+
+</html>
+````
+
