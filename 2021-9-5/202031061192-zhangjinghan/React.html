@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            /* 消除button的默认样式 */
+            margin: 0;
+            padding: 0;
+            border: 1px solid transparent;  /*自定义边框*/
+            outline: none;    /* 消除默认点击蓝色边框效果 */
+            width: 200px;
+            height: 30px;
+            font-size: 17px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            background-color:seagreen;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id="test"></div>
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom,用于支持react操作DOM -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel,用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 引入prop-type,用于对组件标签属性进行限制 -->
+    <script src="../js/prop-types.js"></script>
+    <script type="text/babel">
+        // 创建组件
+        class Page extends React.Component{
+            state = {
+                choice:true
+            }
+            // 去登录
+            goLogin = () => {
+                this.setState({choice:true})
+            }
+            // 去注册
+            goRegister = () => {
+                this.setState({choice:false})
+            }
+            render(){
+                const {choice} = this.state;
+                if(choice){
+                    return (
+                        <div>
+                            <MyTitle  choice={this.state.choice} />
+                            <Login onClick={this.goRegister} />
+                        </div>
+                      
+                    )
+                }
+                else{
+                    return (
+                        <div>
+                            <MyTitle choice={this.state.choice}/>
+                            <Register onClick={this.goLogin}/>
+                        </div>
+                      
+                    )
+                }
+            }
+        }
+        // 登录按钮
+        class Login extends React.Component{
+            render(){
+                return (
+                    <button onClick={this.props.onClick}>登录</button>
+                )
+            }
+        }
+        // 注册按钮
+        class Register extends React.Component{
+            render(){
+                return (
+                    <button onClick={this.props.onClick}>注册</button>
+                )
+            }
+        }
+        // 标题
+        class MyTitle extends React.Component{
+            render(){
+                console.log(this.props);
+                const {choice} = this.props;
+                if(choice){
+                    return (
+                        <h2>请进行注册!</h2>
+                    )
+                }
+                else{
+                    return (
+                        <h2>注册成功!请返回登录</h2>
+                    )
+                }
+            }
+        }
+        // 渲染组件到页面
+        ReactDOM.render(<Page/>,document.getElementById('test'));
+    </script>
+</body>
+</html>
