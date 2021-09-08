@@ -367,7 +367,7 @@ var c = fun(0).fun(1); c.fun(2); c.fun(3);//undefined,0,1,1
 //具名函数
 (function log() {
   console.log(2)
-})
+})()
 // 传参
 (function add(a, b) {
   console.log(a + b)
@@ -386,7 +386,6 @@ let fn = (function add(a, b) {
   return a + b;
 }) (2, 4)
 console.log(fn)
-
 ```
 
 错误写法：
