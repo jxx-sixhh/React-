@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0905</title>
+    <style>
+      button {
+        background-color: pink;
+        border: none;
+        width: 100px;
+        height: 50px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+    <script></script>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script
+      type="text/javascript"
+      src="../js/react-dom.development.js"
+    ></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/babel">
+
+      class Change extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { isregister: false };
+          // 在回调中也能使用this
+          this.handleClick = this.handleClick.bind(this);
+        }
+        handleClick() {
+          this.setState((state) => ({
+            isregister: !state.isregister,
+          }));
+        }
+        render() {
+          return (
+            <div>
+              <h1>{this.state.isregister?'注册成功 请登录':'请注册'}</h1>
+              <button onClick={this.handleClick}>
+                {this.state.isregister ? "登录" : "注册"}
+              </button>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Change />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
